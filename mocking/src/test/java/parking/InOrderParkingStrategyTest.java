@@ -1,10 +1,17 @@
 package parking;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.mockito.Mockito;
 
 public class InOrderParkingStrategyTest {
@@ -49,7 +56,17 @@ public class InOrderParkingStrategyTest {
     public void testPark_givenNoAvailableParkingLot_thenCreateNoSpaceReceipt(){
 
 	    /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for no available parking lot */
+      //given
+      ParkingLot parkingLot = spy(new ParkingLot("parkingLot",0));
+      List<ParkingLot> parkingLots = new ArrayList<>();
+      parkingLots.add(parkingLot);
 
+      //when
+      InOrderParkingStrategy inOrderParkingStrategy = new InOrderParkingStrategy();
+      inOrderParkingStrategy.park(parkingLots,new Car("car"));
+
+      //then
+      verify(parkingLot,times(1)).isFull();
     }
 
     @Test
