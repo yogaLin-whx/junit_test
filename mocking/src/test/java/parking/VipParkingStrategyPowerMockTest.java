@@ -39,6 +39,17 @@ public class VipParkingStrategyPowerMockTest {
 
     /* Exercise 6: Write test case for VipParkingStrategy calculateHourlyPrice
      * by using PowerMock to mock static method */
+      //given
+      Calendar endOfMarch = Calendar.getInstance();
+      endOfMarch.set(2020, Calendar.AUGUST, 29);
+      PowerMockito.mockStatic(Calendar.class);
+      Mockito.when(Calendar.getInstance()).thenReturn(endOfMarch);
+
+      //when
+      VipParkingStrategy vipParkingStrategy = new VipParkingStrategy();
+      int result = vipParkingStrategy.calculateHourlyPrice();
+
+      assertEquals(40, result);
 
   }
 }
