@@ -44,6 +44,4 @@ public class InOrderParkingStrategy implements ParkingStrategy {
 		receipt.setParkingLotName(NO_PARKING_LOT);
 		return receipt;
 	}
-
-	
 }
