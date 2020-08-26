@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class VipParkingStrategy implements ParkingStrategy {
 
-	CarDao carDao;
+	CarDaoImpl carDao;
 
 	public VipParkingStrategy(){
 		carDao = new CarDaoImpl();
@@ -47,7 +47,7 @@ public class VipParkingStrategy implements ParkingStrategy {
 	}
 
 	public boolean isAllowOverPark(Car car){
-		return carDao.isVip(car.getName()) && StringUtils.contains(car.getName(), "A");
+		return carDao.isVip(car.getName());
 	}
 
 	@Override
