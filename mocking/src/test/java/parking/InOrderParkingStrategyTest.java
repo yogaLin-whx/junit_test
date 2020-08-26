@@ -1,6 +1,7 @@
 package parking;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -73,7 +74,17 @@ public class InOrderParkingStrategyTest {
     public void testPark_givenThereIsOneParkingLotWithSpace_thenCreateReceipt(){
 
         /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for one available parking lot */
+      //given
+      ParkingLot parkingLot = spy(new ParkingLot("parkingLot",1));
+      InOrderParkingStrategy inOrderParkingStrategy = spy(new InOrderParkingStrategy());
+      List<ParkingLot> parkingLots = new ArrayList<>();
+      parkingLots.add(parkingLot);
 
+      //when
+      inOrderParkingStrategy.park(parkingLots,new Car("car"));
+
+      //then
+      verify(inOrderParkingStrategy,times(1)).createReceipt(any(),any());
     }
 
     @Test
