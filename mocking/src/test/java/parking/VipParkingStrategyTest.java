@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class VipParkingStrategyTest {
 
     @Mock
-    private CarDao carDao;
+    private CarDaoImpl carDao;
 
     @InjectMocks
     VipParkingStrategy vipParkingStrategy;
@@ -67,6 +67,7 @@ public class VipParkingStrategyTest {
          */
         //given
         Car car = new Car("Acar");
+        when(carDao.isVip(any())).thenReturn(true);
 
         //when
         boolean result = vipParkingStrategy.isAllowOverPark(car);
@@ -84,7 +85,7 @@ public class VipParkingStrategyTest {
          */
         //given
         Car car = new Car("1");
-
+        when(carDao.isVip(any())).thenReturn(true);
         //when
         boolean result = vipParkingStrategy.isAllowOverPark(car);
 
@@ -98,6 +99,13 @@ public class VipParkingStrategyTest {
          * You may refactor the code, or try to use
          * use @RunWith(MockitoJUnitRunner.class), @Mock (use Mockito, not PowerMock) and @InjectMocks
          */
+        Car car = new Car("ACar");
+        when(carDao.isVip(any())).thenReturn(false);
+        //when
+        boolean result = vipParkingStrategy.isAllowOverPark(car);
+
+        //then
+        assertFalse(result);
     }
 
     @Test
